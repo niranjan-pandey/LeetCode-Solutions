@@ -6,25 +6,28 @@ class Solution {
         int n = grid.length;
         int m = grid[0].length;
 
-        int[] A = new int[n*m];
-        int[] B = new int[n*m];
-        int Idx = 0;
-        for(int i = 0; i < n; ++i) 
-            for(int j = 0; j < m; ++j) 
-                A[Idx++] = grid[i][j];
+        int total = n*m;
+        K %= total;
 
-        int N = n*m;
-        for(int i = 0; i < N; ++i)
-            B[(i+K) % N] = A[i];
-
-        Idx = 0;    
         for(int i = 0; i < n; ++i) {
-            List<Integer> subList = new ArrayList<>();
+            List<Integer> row = new ArrayList<>();
+            for(int j = 0; j < m; ++j) 
+                row.add(0);
+            result.add(row);
+        }
+
+        for(int i = 0; i < n; ++i) {
             for(int j = 0; j < m; ++j) {
-                subList.add(B[Idx++]); 
+
+                int oldIdx = i * m + j;
+                int newIdx = (oldIdx + K) % total;
+
+                int newRow = newIdx / m;
+                int newCol = newIdx % m;
+
+                result.get(newRow).set(newCol, grid[i][j]);
             }
-            result.add(subList);
-        }          
+        }
         return result;        
     }
 }

@@ -2,6 +2,7 @@ class Solution {
     public int uniqueXorTriplets(int[] nums) {
 
         /*
+        This will work only if N > 2
         Numbers are from 1 to n so the maximum number we can make is 2^n
         nums = [1, 2, 3, 4]
         n = 4

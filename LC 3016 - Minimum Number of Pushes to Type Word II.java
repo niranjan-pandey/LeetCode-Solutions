@@ -2,7 +2,7 @@ class Solution {
     public int minimumPushes(String word) {
 
         //TC = O(n)
-        //SC = O(1)
+        //SC = O(26)
 
         int[] freq = new int[26];
         for(char c : word.toCharArray())

@@ -1,30 +1,18 @@
 class Solution {
-    int[][] dp = new int[501][501];
     public boolean stoneGame(int[] piles) {
-        
-        for(int[] row : dp)
-            Arrays.fill(row, -1);
 
-        int totalSum = Arrays.stream(piles).sum();
+        /*
+        Because there are an even number of piles and the total number of stones is odd, 
+        the first player can always force themselves to take 
+        either all odd-positioned or all even-positioned piles, 
+        and one of those groups must contain more stones. [Because totalSum will always odd]
+        Therefore Alice always wins.
+        */
 
-        int n = piles.length;
-        int scoreA = solve(piles, 0, n-1);
-        int scoreB = totalSum - scoreA;
+        //Solution 3
+        //TC = O(1)
+        //SC = O(1)
 
-        return scoreA > scoreB;
-    }
-
-    private int solve(int[] nums, int i, int j) {
-
-        if(i >= j || j < 0 || i >= nums.length)
-            return 0;
-
-        if(dp[i][j] != -1)
-            return dp[i][j];    
-
-        int takeF = nums[i] + solve(nums, i+2, j);
-        int takeL = nums[j] + solve(nums, i, j-2);
-
-        return dp[i][j] = Math.max(takeF, takeL);    
+        return true;
     }
 }

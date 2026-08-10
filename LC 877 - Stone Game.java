@@ -9,7 +9,7 @@ class Solution {
         Therefore Alice always wins.
         */
 
-        //Solution 3
+        //Solution 1
         //TC = O(1)
         //SC = O(1)
 
@@ -33,7 +33,7 @@ class Solution {
         you have minimum remaining number(Assume) to choose because maximum is already choose by the opponent
         */
 
-        //Recursion Solution 1
+        //Solution 2 Recursion
         //TC = O(2^n)
         //SC = O(n)
         

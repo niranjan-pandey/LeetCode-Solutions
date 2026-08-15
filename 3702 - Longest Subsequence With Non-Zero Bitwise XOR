@@ -1,0 +1,22 @@
+class Solution {
+    public int longestSubsequence(int[] nums) {
+
+        //TC = O(n)
+        //SC = O(1)
+
+        int numsXor = 0;
+        boolean nonZero = false;
+
+        int n = nums.length;
+        for(int i = 0; i < n; ++i)  {
+            if(nums[i] > 0)
+                nonZero = true;
+            numsXor ^= nums[i];    
+        }
+
+        if(!nonZero)
+            return 0;
+
+        return numsXor == 0 ? n-1 : n;
+    }
+}

@@ -1,0 +1,32 @@
+class Solution {
+    public int largestInteger(int[] nums, int K) {
+
+        /*
+        K == n | max Element
+        K == 1 | max Element with Freq 1
+        Else | max Element with Freq 1 (start or End number only)
+        */
+
+        //TC = O(n)
+        //SC = O(51)
+
+        int[] freq = new int[51];
+        for(int num : nums) 
+            freq[num]++;
+
+        int result = -1;    
+        int n = nums.length;
+        for(int i = 0; i < n; ++i) {
+            if(K == n)
+                result = Math.max(result, nums[i]);
+            else if(freq[nums[i]] == 1)
+            {
+                if(K == 1)
+                    result = Math.max(result, nums[i]);
+                else if(i == 0 || i == n-1)
+                    result = Math.max(result, nums[i]);    
+            }   
+        }
+        return result;
+    }
+}

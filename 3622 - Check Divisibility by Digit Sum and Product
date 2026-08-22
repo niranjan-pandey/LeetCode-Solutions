@@ -1,0 +1,19 @@
+class Solution {
+    public boolean checkDivisibility(int n) {
+
+        //TC = O(log(n)) base10
+        //TC = O(1)
+        
+        int N = n;
+        int dSum = 0;
+        int dProduct = 1;
+
+        while(n > 0) {
+            int digit = n % 10;
+            dSum = dSum + digit;;
+            dProduct = dProduct * digit;
+            n /= 10;
+        }
+        return N % (dSum + dProduct) == 0;
+    }
+}

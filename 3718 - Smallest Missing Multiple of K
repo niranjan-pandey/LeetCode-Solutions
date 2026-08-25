@@ -1,0 +1,17 @@
+class Solution {
+    public int missingMultiple(int[] nums, int K) {
+
+        //TC = O(n)
+        //SC = O(n)
+        
+        Set<Integer> seen = new HashSet<>();
+        for(int num : nums)
+            seen.add(num);
+
+        int curMultiple = K;    
+        while(seen.contains(curMultiple))
+            curMultiple += K;    
+
+        return curMultiple;    
+    }
+}

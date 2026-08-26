@@ -1,0 +1,30 @@
+class Solution {
+    public String shortestBeautifulSubstring(String s, int K) {
+
+        //TC = O(n)
+        //SC = O(1)
+        
+        String result = "";
+        int n = s.length();
+        for(int start = 0, end = 0, cntOne = 0; end < n; ++end) {
+
+            if(s.charAt(end) == '1') 
+                cntOne++;
+
+            while(cntOne > K || (cntOne == K && s.charAt(start) == '0')) {
+                if(s.charAt(start) == '1')    
+                    cntOne--;
+                start++;    
+            }     
+
+            String curS = s.substring(start, end + 1);
+            if(cntOne == K) {
+                if(result.length() == 0 || curS.length() < result.length()) 
+                    result = curS;
+                if(curS.length() == result.length() && curS.compareTo(result) < 0)
+                    result = curS;    
+            }   
+        }
+        return result;
+    }
+}

@@ -1,0 +1,45 @@
+class Solution {
+    String result = "";
+    public String lexGreaterPermutation(String s, String target) {
+
+        //TC = O(n)
+        //SC = O(n)
+        
+        int[] freq = new int[26];
+        for(char c : s.toCharArray())
+            freq[c-'a']++;
+
+        solve(target, 0, new StringBuilder(), freq, false);
+        return result;
+    }
+
+    private boolean solve(String target, int Idx, StringBuilder sb, int[] freq, boolean greaterFlg) {
+
+        if(Idx == target.length() && greaterFlg) {
+            result = sb.toString();
+            return true;
+        }
+
+        for(char c = 'a'; c <= 'z'; ++c) {
+            if(freq[c-'a'] == 0)
+                continue;
+
+            //If current string is not lexicographically greater then target then we can't add small characters
+            if(!greaterFlg && c < target.charAt(Idx))
+                continue;
+
+            sb.append(c);
+            freq[c-'a']--;
+
+            boolean isGreater = greaterFlg || c > target.charAt(Idx);
+            if(solve(target, Idx+1, sb, freq, isGreater)) {
+                return true;
+            }     
+
+            //Backtracking
+            sb.deleteCharAt(sb.length()-1);
+            freq[c-'a']++;   
+        }
+        return false;
+    }
+}

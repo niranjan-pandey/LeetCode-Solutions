@@ -1,0 +1,17 @@
+class Solution {
+    public boolean uniformArray(int[] nums) {
+
+        /*
+        If at least 1 value is odd then we can make all value odd
+        even - even = even
+        odd - odd = even
+        even - odd = odd
+        odd - even = odd
+        */
+
+        //TC = O(1)
+        //SC = O(1)
+
+        return true;
+    }
+}

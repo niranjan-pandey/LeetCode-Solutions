@@ -1,0 +1,22 @@
+class Solution {
+    public boolean uniformArray(int[] nums) {
+
+        //TC = O(n)
+        //SC = O(1)
+
+        int minOdd = Integer.MAX_VALUE;
+        int minEven = Integer.MAX_VALUE;
+        
+        for(int num : nums) {
+            if(num % 2 == 1)
+                minOdd = Math.min(minOdd, num);    
+            else    
+                minEven = Math.min(minEven, num);
+        }
+
+        if(minOdd == Integer.MAX_VALUE || minEven == Integer.MAX_VALUE)
+            return true;
+
+        return minEven > minOdd;
+    }
+}

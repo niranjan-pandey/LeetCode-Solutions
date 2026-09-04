@@ -1,0 +1,22 @@
+class Solution {
+    public int firstStableIndex(int[] nums, int K) {
+
+        //TC = O(n)
+        //SC = O(n)
+
+        int n = nums.length;
+        int[] rMin = new int[n];
+
+        for(int i = n-1, minNum = nums[n-1]; i >= 0; --i) {
+            minNum = Math.min(minNum, nums[i]);
+            rMin[i] = minNum;
+        }
+
+        for(int i = 0, maxNum = 0; i < n; ++i) {
+            maxNum = Math.max(maxNum, nums[i]);
+            if(maxNum - rMin[i] <= K)
+                return i;
+        }
+        return -1;
+    }
+}

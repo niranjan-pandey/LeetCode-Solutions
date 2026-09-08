@@ -1,0 +1,9 @@
+class Solution {
+    public int countCommas(int n) {
+
+        //TC = O(n)
+        //SC = O(n)
+
+        return n < 1000 ? 0 : n - 999;
+    }
+}

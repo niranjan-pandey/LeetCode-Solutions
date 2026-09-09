@@ -1,0 +1,30 @@
+class Solution {
+    public long countCommas(long n) {
+
+        //TC = O(1)
+        //SC = O(1)
+
+        long[][] nums = new long[5][5];
+        nums[0] = new long[]{(long)1e3,  (long)1e6 -1,  1L};
+        nums[1] = new long[]{(long)1e6,  (long)1e9 -1,  2L};
+        nums[2] = new long[]{(long)1e9,  (long)1e12-1,  3L};
+        nums[3] = new long[]{(long)1e12, (long)1e15-1,  4L};
+        nums[4] = new long[]{(long)1e15, (long)1e16-1,  5L};
+
+        long prev = 999;
+        long result = 0;
+        for(long[] num : nums) {
+            long l = num[0];
+            long r = num[1];
+            long insertCnt = num[2];
+
+            if(l > n)   
+                break;
+
+            long total = ((Math.min(r, n) - prev) * insertCnt);
+            result += total;
+            prev = r;    
+        }
+        return result;
+    }
+}

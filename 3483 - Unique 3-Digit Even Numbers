@@ -1,0 +1,34 @@
+class Solution {
+    public int totalNumbers(int[] digits) {
+
+        //TC = O(1)
+        //SC = O(1)
+
+        int[] freq = new int[10];
+        for(int digit : digits)
+            freq[digit]++;
+
+        int result = 0;    
+        for(int i = 1; i <= 9; i++) { //1st place can't start with 0 [1-9]
+            for(int j = 0; j <= 9; j++) { //2nd place [0-9]
+                for(int k = 0; k <= 8; k+=2) { //3rd place only even number is allowed [0,2,4,8]
+
+                    //Current combination is taken
+                    //If you skip this part then when i, j and k point to same digit it count as combination
+                    freq[i]--;
+                    freq[j]--;
+                    freq[k]--;
+                    
+                    if(freq[i] >= 0 && freq[j] >= 0 && freq[k] >= 0)
+                        result++;
+
+                    //For exporing future combinations    
+                    freq[i]++;
+                    freq[j]++;
+                    freq[k]++;    
+                }
+            }
+        }    
+        return result;
+    }
+}

@@ -1,0 +1,30 @@
+class Solution {
+    public int[] maxDepthAfterSplit(String s) {
+
+        /*
+        
+            parentheses =   [ (, (, ), ), (, ) ]
+            depths =        [ 1, 2, 2, 1, 1, 1 ]
+            groups =        [ A, B, B, A, A, A ]
+            solution =      [ 0, 1, 1, 0, 0, 0 ]
+
+            evenDepth = GroupA [0]
+            oddDepth  = GroupB [1]
+
+        */
+
+        //TC = O(n)
+        //SC = O(1)
+        
+        int n = s.length();
+        int[] result = new int[n];
+
+        for(int i = 0, depth = 0; i < n; ++i) {
+            if(s.charAt(i) == '(')
+                result[i] = depth++ % 2;
+            else
+                result[i] = --depth % 2;
+        }
+        return result;
+    }
+}

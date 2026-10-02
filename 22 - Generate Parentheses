@@ -1,0 +1,23 @@
+class Solution {
+    List<String> result = new ArrayList<>();
+    public List<String> generateParenthesis(int n) {
+
+        //TC = O(2^n)
+        //SC = O(n) //Recursion stack
+
+        solve(n, "", 0, 0);
+        return result;
+    }
+
+    private void solve(int n, String s, int open, int close) {
+
+        if(s.length() == 2*n)
+            result.add(s);
+
+        if(open < n)
+            solve(n, s+"(", open+1, close);
+
+        if(close < open)
+            solve(n, s+")", open, close+1);        
+    }
+}

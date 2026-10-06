@@ -1,0 +1,21 @@
+class Solution {
+    public int scoreOfParentheses(String s) {
+
+        //TC = O(n)
+        //SC = O(n)
+        
+        Stack<Integer> stack = new Stack<>();
+        int curScore = 0;
+        for(char c : s.toCharArray()) {
+            if(c == '(') {
+                stack.push(curScore); //Adding previous valid parentheses score
+                curScore = 0; //Setting curScore = 0 for calculating next valid parentheses score
+            } else {
+                curScore = stack.pop() + Math.max(2 * curScore, 1);
+            //  curScore = prevScore + 2 * curScore
+            //  Math.max with 1 is used for calculating first socre of parentheses eg- ()
+            }
+        }
+        return curScore;
+    }
+}

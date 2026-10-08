@@ -1,0 +1,52 @@
+class Solution {
+
+    int n;
+    int maxSize = 0;
+    Set<String> set = new HashSet<>();
+
+    public List<String> removeInvalidParentheses(String s) {
+
+        //TC = O(2^n)
+        //SC = O(n) //Recursion Stack + HashSet
+
+        n = s.length();
+        solve(s, new StringBuilder(), 0, 0);
+        return new ArrayList<>(set);
+    }
+
+    private void solve(String s, StringBuilder curS, int Idx, int open) {
+
+        if(open < 0)
+            return;
+
+        if(Idx == n) {
+            if(open == 0 && curS.length() > maxSize) { 
+                set.clear(); //Clearing set because previous stored values are useless
+                maxSize = curS.length(); //Updating maxSize
+            }   
+            if(open == 0 && curS.length() == maxSize)
+                set.add(curS.toString()); //Adding curString into result
+            return;
+        } 
+
+        //If current character is alphabet then we can't skip it
+        //So Include and explore then Exclude
+        char c = s.charAt(Idx);
+        if(c >= 'a' && c <= 'z') {
+            curS.append(c);
+            solve(s, curS, Idx+1, open);
+            curS.deleteCharAt(curS.length()-1);
+            return;
+        }
+
+        //If current character is parentheses 
+
+        //Include
+        curS.append(c); //Add
+        solve(s, curS, Idx+1, open + (c == '(' ? 1 : -1)); //Explore
+        curS.deleteCharAt(curS.length()-1); //Remove [Backtracking]
+
+        //Exclude
+        solve(s, curS, Idx+1, open);
+    }
+}

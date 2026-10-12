@@ -1,0 +1,35 @@
+class Solution {
+    public int maxSum(List<Integer> nums, int K) {
+
+        //TC = O(n)
+        //SC = O(32)
+        
+        int Mod = (int)1e9 + 7;
+        long result = 0;
+        int[] bitFreq = new int[32];
+        for(int num : nums) {
+            for(int i = 31; i >= 0; i--) {
+                bitFreq[i] += (num & 1);
+                num = num >> 1;
+            }
+        }
+
+        while(K > 0) {
+            long curSum = 0;
+            for(int i = 0; i < 32; i++) {
+                curSum = (curSum * 2) % Mod;
+                if(bitFreq[i] > 0) {
+                    curSum = (curSum + 1) % Mod;
+                    bitFreq[i]--;
+                }
+            }
+
+            if(curSum == 0)
+                break;
+                
+            result = (result + ((curSum * curSum) % Mod)) % Mod;
+            K--;
+        }
+        return (int)result % Mod;
+    }
+}

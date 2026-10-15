@@ -1,0 +1,22 @@
+class Solution {
+    public int sumCounts(List<Integer> nums) {
+
+        //TC = O(n^2)
+        //SC = O(n)
+        
+        int result = 0;
+        int n = nums.size();
+        for(int i = 0; i < n; i++) {
+            int cnt = 0;
+            boolean[] visited = new boolean[101];
+            for(int j = i; j < n; j++) {
+                int num = nums.get(j);
+                if(!visited[num])
+                    cnt++;
+                visited[num] = true;    
+                result += (cnt * cnt);
+            }
+        }
+        return result;
+    }
+}

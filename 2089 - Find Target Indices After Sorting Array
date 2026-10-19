@@ -1,0 +1,23 @@
+class Solution {
+    public List<Integer> targetIndices(int[] nums, int target) {
+
+        //TC = O(n)
+        //SC = O(1)
+
+        List<Integer> result = new ArrayList();
+        int K = 0;
+        int startIdx = 0;
+        int n = nums.length;
+        for(int i = 0; i < n; i++) {
+            if(nums[i] < target)
+                startIdx++;
+            else if(nums[i] == target)
+                K++;    
+        }
+
+        while(K-- > 0) 
+            result.add(startIdx++);
+
+        return result;
+    }
+}

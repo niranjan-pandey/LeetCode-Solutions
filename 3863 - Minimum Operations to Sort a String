@@ -1,0 +1,34 @@
+class Solution {
+    public int minOperations(String s) {
+
+        //TC = O(n)
+        //SC = O(1)
+        
+        char minC = s.charAt(0);
+        char maxC = s.charAt(0);
+        boolean isSorted = true;
+
+        int n = s.length();
+        for(int i = 1; i < n; i++) {
+            if(s.charAt(i) < s.charAt(i-1)) 
+                isSorted = false;
+            if(s.charAt(i) < minC) minC = s.charAt(i);
+            if(s.charAt(i) > maxC) maxC = s.charAt(i);    
+        }
+
+        if(isSorted) 
+            return 0;
+
+        if(n == 2) 
+            return -1;    
+
+        if(s.charAt(0) == minC || s.charAt(n-1) == maxC)
+            return 1;
+
+        for(int i = 1; i < n-1; i++)
+            if(s.charAt(i) == minC || s.charAt(i) ==  maxC)
+                return 2;    
+
+        return 3;        
+    }
+}

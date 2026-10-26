@@ -1,0 +1,33 @@
+class Solution {
+    public int countIslands(int[][] grid, int K) {
+
+        //TC = O(n*m)
+        //SC = O(n*m) //Recursion Stack
+        
+        int n = grid.length;
+        int m = grid[0].length;
+
+        int result = 0;
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++) 
+                if(grid[i][j] != 0 && dfs(grid, i, j) % K == 0)
+                    result++;
+
+        return result;            
+    }
+
+    private long dfs(int[][] grid, int row, int col) {
+        
+        if(row < 0 || row == grid.length || col < 0 || col == grid[0].length || grid[row][col] == 0)
+            return 0;
+
+        long totalSum = grid[row][col];
+        grid[row][col] = 0;
+        totalSum += dfs(grid, row+1, col);  
+        totalSum += dfs(grid, row-1, col);  
+        totalSum += dfs(grid, row, col+1);  
+        totalSum += dfs(grid, row, col-1);    
+
+        return totalSum;
+    }
+}

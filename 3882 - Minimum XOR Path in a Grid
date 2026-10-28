@@ -1,0 +1,37 @@
+class Solution {
+    int[][][] dp;
+    public int minCost(int[][] grid) {
+
+        //Memoization
+        //TC = O(n*m*1024)
+        //SC = O(n*m*1024)
+        
+        int n = grid.length;
+        int m = grid[0].length;
+
+        dp = new int[n][m][1024];
+        for(int[][] M : dp)
+            for(int[] row : M)
+                Arrays.fill(row, -1);
+
+        return solve(grid, 0, 0, 0, n, m);
+    }
+
+    private int solve(int[][] grid, int Xor, int row, int col, int n, int m) {
+
+        if(row == n || col == m)
+            return 1023;
+
+        Xor ^= grid[row][col];    
+        if(row == n-1 && col == m-1) 
+            return Xor;    
+
+        if(dp[row][col][Xor] != -1)
+            return dp[row][col][Xor];    
+
+        int down = solve(grid, Xor, row+1, col, n, m);
+        int right = solve(grid, Xor, row, col+1, n, m);
+
+        return dp[row][col][Xor] = Math.min(down, right);    
+    }
+}

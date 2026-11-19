@@ -1,0 +1,19 @@
+class Solution {
+    public String digitSum(String s, int K) {
+
+        //TC = O(n*m) m = total rounds
+        //SC = O(n)
+
+        while(s.length() > K) {
+            StringBuilder next = new StringBuilder();
+            for(int i = 0; i < s.length(); i+=K) {
+                int curSum = 0;
+                for(int j = i; j < s.length() && j < i+K; j++) 
+                    curSum += s.charAt(j)-'0';
+                next.append(curSum);
+            }
+            s = next.toString();
+        }
+        return s;
+    }
+}
